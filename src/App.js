@@ -3,6 +3,9 @@ import './App.css';
 
 import InputValidator from './InputValidator/InputValidator'
 
+import CharComponent from './CharComponent/CharComponent'
+import './CharComponent/CharComponent.css'
+
 class App extends Component {
 
 state = {
@@ -20,12 +23,23 @@ inputChangeHandler = (event) => {
 
   render() {
 
+    const charList = () => {
+      const charArray = this.state.input.split('');
+
+     return charArray.map(char => {
+        return <CharComponent inputChar={char} />
+      })
+    }
+
     return (
       <div className="App">
         <header className="App-header">
           <input onChange={this.inputChangeHandler}></input>
           <p>Input length: {this.state.input.length}</p>
           <InputValidator inputValue={this.state.input} inputMin={this.state.inputMin}/>
+          <div>
+            {charList()}
+          </div>
         </header>
       </div>
     );
